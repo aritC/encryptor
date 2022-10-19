@@ -1,5 +1,9 @@
 <div class="container centered">
-  <form>
+  <form
+    *ngIf="!isEncrypted"
+    [formGroup]="encryptionForm"
+    (ngSubmit)="encrypt()"
+  >
     <div class="row">
       <div class="col">
         <div class="form-group">
@@ -7,8 +11,7 @@
           <input
             type="text"
             class="form-control"
-            id="password"
-            aria-describedby="emailHelp"
+            formControlName="password"
             placeholder="Enter password"
           />
         </div>
@@ -17,12 +20,11 @@
           <input
             type="number"
             class="form-control"
-            id="viewCount"
+            formControlName="viewCount"
             placeholder="Max View Count"
-            min="-1"
           />
-          <small id="viewCountHelp" class="form-text text-white"
-            >-1 is for unlimited views</small
+          <small id="viewCountHelp" class="form-text"
+            >-1 is for unlimited views. 0 is not allowed</small
           >
         </div>
       </div>
@@ -31,7 +33,7 @@
           <!-- <label for="message">Your Message</label> -->
           <textarea
             class="form-control"
-            id="message"
+            formControlName="text"
             rows="5"
             placeholder="Message"
           ></textarea>
@@ -39,9 +41,24 @@
       </div>
     </div>
     <div class="row">
-      <button type="submit" class="btn col-lg-12 mt-5 font-weight-bold">
-        Encrypt
+      <button
+        type="submit"
+        [disabled]="!encryptionForm.valid"
+        class="btn col-lg-12 mt-5 font-weight-bold"
+      >
+        <div *ngIf="!isLoading">Encrypt</div>
+        <div *ngIf="isLoading" class="spinner-border text-light" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
       </button>
     </div>
   </form>
+
+  <div *ngIf="isEncrypted">
+    <p>Encrypted Link: {{ link }}</p>
+    <p>Password: {{ password }}</p>
+    <button class="btn col-lg-12 mt-5 font-weight-bold" (click)="reset()">
+      Back
+    </button>
+  </div>
 </div>
