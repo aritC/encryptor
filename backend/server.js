@@ -34,7 +34,7 @@ pool.getConnection(function (err, conn) {
   pool.releaseConnection(conn);
 });
 
-app.post("/encrypt", (req, res) => {
+app.post("/api/encrypt", (req, res) => {
   let errors = [];
   if (!req.body.text || req.body.text.length == 0) {
     errors.push("Body Cannot be empty");
@@ -89,7 +89,7 @@ app.post("/encrypt", (req, res) => {
   });
 });
 
-app.get("/:uid", (req, res) => {
+app.get("/api/:uid", (req, res) => {
   let { uid } = req.params;
   let value = [uid];
   pool.query(GET_ENCRYPTED, [value], (err, results) => {
@@ -105,6 +105,12 @@ app.get("/:uid", (req, res) => {
         isValid: false,
       });
     }
+
+    let { viewCount } = results[0];
+    if (viewCount === 0) {
+      return res.status(400).send({ message: ["Link has Expired"] });
+    }
+
     return res
       .status(200)
       .send({ message: ["Found"], uid: uid, isValid: true });
@@ -122,7 +128,7 @@ decryptText = (encryptedText, password, stringIv) => {
   return decrypted;
 };
 
-app.post("/decrypt", (req, res) => {
+app.post("/api/decrypt", (req, res) => {
   let errors = [];
 
   if (!req.body.password || req.body.password.length == 0) {

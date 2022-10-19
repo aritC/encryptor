@@ -1,1 +1,47 @@
-<p>encryptor works!</p>
+<div class="container centered">
+  <form>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <!-- <label for="password">Password</label> -->
+          <input
+            type="text"
+            class="form-control"
+            id="password"
+            aria-describedby="emailHelp"
+            placeholder="Enter password"
+          />
+        </div>
+        <div class="form-group font-weight-bold">
+          <!-- <label for="viewCount">View Count</label> -->
+          <input
+            type="number"
+            class="form-control"
+            id="viewCount"
+            placeholder="Max View Count"
+            min="-1"
+          />
+          <small id="viewCountHelp" class="form-text text-white"
+            >-1 is for unlimited views</small
+          >
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <!-- <label for="message">Your Message</label> -->
+          <textarea
+            class="form-control"
+            id="message"
+            rows="5"
+            placeholder="Message"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn col-lg-12 mt-5 font-weight-bold">
+        Encrypt
+      </button>
+    </div>
+  </form>
+</div>
