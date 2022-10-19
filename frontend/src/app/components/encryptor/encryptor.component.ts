@@ -37,16 +37,20 @@ export class EncryptorComponent implements OnInit {
   }
 
   encrypt() {
-    console.log(this.encryptionForm.value);
     this.isLoading = true;
     if (this.encryptionForm.valid) {
       let { password, text, viewCount } = this.encryptionForm.value;
       this.api.encrypt(text, password, viewCount).subscribe({
         next: (res) => {
+          console.log(res);
           this.isLoading = false;
           this.isEncrypted = true;
           this.password = res.password;
           this.link = res.link;
+        },
+        error: (err) => {
+          console.log('weoe', err);
+          this.isLoading = false;
         },
       });
     }
@@ -56,5 +60,6 @@ export class EncryptorComponent implements OnInit {
     this.isEncrypted = false;
     this.password = '';
     this.link = '';
+    this.encryptionForm.reset();
   }
 }
