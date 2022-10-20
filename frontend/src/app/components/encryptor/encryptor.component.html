@@ -55,10 +55,32 @@
   </form>
 
   <div *ngIf="isEncrypted">
-    <p>Encrypted Link: {{ link }}</p>
+    <p>
+      Encrypted Link: <a href="{{ link }}" target="_blank">{{ link }}</a>
+    </p>
     <p>Password: {{ password }}</p>
     <button class="btn col-lg-12 mt-5 font-weight-bold" (click)="reset()">
       Back
     </button>
   </div>
 </div>
+<ngb-toast
+  *ngIf="isError"
+  class="toast-container float-right m-5 bg-danger text-light"
+  style="z-index: 2147483647"
+  [autohide]="true"
+  [delay]="2000"
+  (hidden)="toastHidden()"
+>
+  {{ errorMessage }}
+</ngb-toast>
+<ngb-toast
+  *ngIf="isEncrypted"
+  class="toast-container float-right m-5 bg-success text-light"
+  style="z-index: 2147483647"
+  [autohide]="true"
+  [delay]="2000"
+  (hidden)="toastHidden()"
+>
+  Data Encrypted Successfuly!
+</ngb-toast>
