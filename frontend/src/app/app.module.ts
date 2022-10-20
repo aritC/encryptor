@@ -9,6 +9,8 @@ import { EncryptorComponent } from './components/encryptor/encryptor.component';
 import { DecryptorComponent } from './components/decryptor/decryptor.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ApiserviceService } from './services/apiservice.service';
+import { ServerErrorComponent } from './components/server-error/server-error.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { ApiserviceService } from './services/apiservice.service';
     EncryptorComponent,
     DecryptorComponent,
     NotFoundComponent,
+    ServerErrorComponent,
   ],
   imports: [
     HttpClientModule,
@@ -23,6 +26,7 @@ import { ApiserviceService } from './services/apiservice.service';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    NgbModule,
   ],
   providers: [ApiserviceService],
   bootstrap: [AppComponent],

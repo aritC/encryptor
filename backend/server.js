@@ -100,7 +100,7 @@ app.get("/api/:uid", (req, res) => {
 
     if (results == null || results.length == 0) {
       console.log("Text ID not found");
-      return res.status(404).send({
+      return res.status(400).send({
         message: ["Text ID not found. Please check the link"],
         isValid: false,
       });
@@ -111,9 +111,7 @@ app.get("/api/:uid", (req, res) => {
       return res.status(400).send({ message: ["Link has Expired"] });
     }
 
-    return res
-      .status(200)
-      .send({ message: ["Found"], uid: uid, isValid: true });
+    return res.status(200).send({ message: ["Found"], uid: uid });
   });
 });
 
