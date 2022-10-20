@@ -1,1 +1,51 @@
-<p>decryptor works!</p>
+<div class="container centered">
+  <div *ngIf="isExpired">
+    <p class="display-1 font-weight-bold text-center">Link is Invalid</p>
+    <p class="blockquote text-center">
+      Maybe, the link shared is wrong, maybe it expired.<br />
+      Either ways check and try again!
+    </p>
+  </div>
+  <div *ngIf="isError">
+    <p class="display-1 font-weight-bold text-center">Password is Wrong</p>
+    <p class="blockquote text-center">
+      Password looks to be incorrect.<br />
+      Check and try again!
+    </p>
+  </div>
+  <form
+    *ngIf="!isExpired && !isError"
+    [formGroup]="decryptionForm"
+    (ngSubmit)="decrypt()"
+  >
+    <div class="row">
+      <div class="col-8">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="password"
+            placeholder="Enter password"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <button
+          type="submit"
+          [disabled]="!decryptionForm.valid"
+          class="btn col-lg-12 font-weight-bold"
+        >
+          <div *ngIf="!isLoading">Decrypt</div>
+          <div
+            *ngIf="isLoading"
+            class="spinner-border text-light"
+            role="status"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="row"></div>
+  </form>
+</div>
