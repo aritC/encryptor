@@ -148,7 +148,6 @@ app.post("/api/decrypt", (req, res) => {
       console.log("Error Getting data: ", err);
       return res.status(500).send({ message: ["Error Getting data"] });
     }
-
     if (results == null || results.length == 0) {
       console.log("Text ID not found");
       return res.status(404).send({
@@ -172,11 +171,11 @@ app.post("/api/decrypt", (req, res) => {
             return res.status(500).send({ message: ["Error Updating Count"] });
           }
         });
-
-        return res
-          .status(200)
-          .send({ message: ["Success"], decryptedText: decrypted });
       }
+
+      return res
+        .status(200)
+        .send({ message: ["Success"], decryptedText: decrypted });
     } catch (err) {
       console.log("Decrpytion Error: ", err);
       return res.status(400).send({
