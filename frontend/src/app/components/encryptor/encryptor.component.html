@@ -44,7 +44,7 @@
       <button
         type="submit"
         [disabled]="!encryptionForm.valid"
-        class="btn col-lg-12 mt-5 font-weight-bold"
+        class="btn btn-warning col-lg-12 font-weight-bold"
       >
         <div *ngIf="!isLoading">Encrypt</div>
         <div *ngIf="isLoading" class="spinner-border text-light" role="status">
@@ -66,8 +66,8 @@
 </div>
 <ngb-toast
   *ngIf="isError"
-  class="toast-container float-right m-5 bg-danger text-light"
-  style="z-index: 2147483647"
+  class="toast-container m-5 bg-danger text-light"
+  style="z-index: 2147483647; position: absolute; top: 0; right: 0"
   [autohide]="true"
   [delay]="2000"
   (hidden)="toastHidden()"
@@ -76,8 +76,8 @@
 </ngb-toast>
 <ngb-toast
   *ngIf="isEncrypted"
-  class="toast-container float-right m-5 bg-success text-light"
-  style="z-index: 2147483647"
+  class="toast-container m-5 bg-success text-light"
+  style="z-index: 2147483647; position: absolute; top: 0; right: 0"
   [autohide]="true"
   [delay]="2000"
   (hidden)="toastHidden()"

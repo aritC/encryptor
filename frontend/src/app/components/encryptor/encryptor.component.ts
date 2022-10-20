@@ -55,7 +55,8 @@ export class EncryptorComponent implements OnInit {
         },
         error: (err) => {
           this.isLoading = false;
-          if (err.status === 500) this.router.navigateByUrl('/500');
+          if (err.status === 500 || err.status === 0)
+            this.router.navigateByUrl('/500');
           this.isError = true;
           this.errorMessage = err.error.toString();
         },
