@@ -6,15 +6,8 @@
       Either ways check and try again!
     </p>
   </div>
-  <div *ngIf="isError">
-    <p class="display-1 font-weight-bold text-center">Password is Wrong</p>
-    <p class="blockquote text-center">
-      Password looks to be incorrect.<br />
-      Check and try again!
-    </p>
-  </div>
   <form
-    *ngIf="!isExpired && !isError"
+    *ngIf="!isExpired && !isDecrypted"
     [formGroup]="decryptionForm"
     (ngSubmit)="decrypt()"
   >
@@ -33,7 +26,7 @@
         <button
           type="submit"
           [disabled]="!decryptionForm.valid"
-          class="btn col-lg-12 font-weight-bold"
+          class="btn btn-warning col-lg-12 font-weight-bold"
         >
           <div *ngIf="!isLoading">Decrypt</div>
           <div
@@ -48,4 +41,23 @@
     </div>
     <div class="row"></div>
   </form>
+  <div *ngIf="isDecrypted">
+    <textarea id="decryptedText" rows="5" cols="100">
+ {{ decryptedText }} </textarea
+    >
+    <button class="btn col-lg-12 mt-5 font-weight-bold" (click)="reset()">
+      Back
+    </button>
+  </div>
 </div>
+<ngb-toast
+  *ngIf="isError"
+  class="toast-container m-5 bg-danger text-light"
+  style="z-index: 2147483647; position: absolute; top: 0; right: 0"
+  [autohide]="true"
+  [delay]="5000"
+  (hidden)="toastHidden()"
+  [animation]="true"
+>
+  {{ errorMessage }}
+</ngb-toast>

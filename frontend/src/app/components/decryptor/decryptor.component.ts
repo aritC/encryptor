@@ -25,6 +25,7 @@ export class DecryptorComponent implements OnInit {
     });
     this.isError = false;
   }
+
   decryptionForm!: FormGroup;
   uid!: string;
   isExpired!: boolean;
@@ -32,22 +33,12 @@ export class DecryptorComponent implements OnInit {
   isDecrypted!: boolean;
   decryptedText!: string;
   isError!: boolean;
+  errorMessage!: string;
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.uid = params.get('uid')!;
-      this.api.checkLink(this.uid).subscribe({
-        next: (res) => {
-          this.isExpired = false;
-        },
-        error: (err) => {
-          if (err.status === 400) {
-            this.isExpired = true;
-          } else {
-            this.router.navigateByUrl('/500');
-          }
-        },
-      });
+      this.checkLink();
     });
   }
 
@@ -63,11 +54,43 @@ export class DecryptorComponent implements OnInit {
           console.log(res);
         },
         error: (err) => {
+          console.log(err);
           this.isLoading = false;
+          if (err.status === 500 || err.status === 0)
+            this.router.navigateByUrl('/500');
           this.isError = true;
-          if (err.status === 500) this.router.navigateByUrl('/500');
+          this.errorMessage = err.error.toString();
         },
       });
+    } else {
+      this.errorMessage = 'Form Data is Invalid';
     }
+  }
+
+  toastHidden(): void {
+    this.isError = false;
+    this.decryptionForm.reset();
+  }
+
+  reset() {
+    this.decryptionForm.reset();
+    this.isDecrypted = false;
+    this.decryptedText = '';
+    this.checkLink();
+  }
+
+  checkLink(): void {
+    this.api.checkLink(this.uid).subscribe({
+      next: (res) => {
+        this.isExpired = false;
+      },
+      error: (err) => {
+        if (err.status === 400) {
+          this.isExpired = true;
+        } else {
+          this.router.navigateByUrl('/500');
+        }
+      },
+    });
   }
 }
