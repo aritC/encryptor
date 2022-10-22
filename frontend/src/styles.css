@@ -21,3 +21,24 @@ body {
   background-color: white;
   box-shadow: 10px 10px 10px;
 }
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.linkedin {
+  width: 10%;
+  max-width: 80px;
+}
+
+.github {
+  width: 3%;
+  max-width: 60px;
+}
+
+.name {
+  font-size: large;
+}
