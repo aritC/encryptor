@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/services/apiservice.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-encryptor',
@@ -58,7 +57,7 @@ export class EncryptorComponent implements OnInit {
           if (err.status === 500 || err.status === 0)
             this.router.navigateByUrl('/500');
           this.isError = true;
-          this.errorMessage = err.error.toString();
+          this.errorMessage = err.error.mesage.toString();
         },
       });
     } else {

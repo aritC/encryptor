@@ -59,7 +59,7 @@ export class DecryptorComponent implements OnInit {
           if (err.status === 500 || err.status === 0)
             this.router.navigateByUrl('/500');
           this.isError = true;
-          this.errorMessage = err.error.toString();
+          this.errorMessage = err.error.message.toString();
         },
       });
     } else {
