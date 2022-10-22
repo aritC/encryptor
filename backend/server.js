@@ -81,7 +81,7 @@ app.post("/api/encrypt", (req, res) => {
         console.log(results);
         return res.status(200).send({
           message: "Data Encrypted Suceesfully",
-          link: `${process.env.domain}/decrypt/${uid}`,
+          link: `${process.env.DOMAIN}/decrypt/${uid}`,
           password: password,
         });
       });
