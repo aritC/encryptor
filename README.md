@@ -23,7 +23,7 @@ This project uses Angular for the frontend and NodeJs as the API server. NodeJs 
 ## TODO LISTS
 
 - [x] Install SSL certs.
-- [] Move code to Prisma ORM.
-- [] Ability for Sender to select Date Time for expiry as well.
-- [] Setup CI/CD
-- [] UI Improvements.
+- [ ] Move code to Prisma ORM.
+- [ ] Ability for Sender to select Date Time for expiry as well.
+- [ ] Setup CI/CD
+- [ ] UI Improvements.
