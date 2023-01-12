@@ -3,7 +3,6 @@
 Encrypt your messages and get a shareable link for the same
 
 Hosted at : https://encryptor.aritchanda.com/
-NOT LIVE CURRENTLY AS THE EC2 MACHINE IS UNREACHABLE
 
 ## IDEA
 
